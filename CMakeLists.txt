@@ -41,6 +41,7 @@ add_message_files (
 generate_messages (
   DEPENDENCIES
   std_msgs
+  geometry_msgs
 )
 
 # Declare this project as a catkin package
@@ -50,6 +51,7 @@ catkin_package(
    CATKIN_DEPENDS message_runtime
 )
 
+add_definitions(-DMONO_COLOR)
 
 # Add the headers from roscpp
 include_directories(include ${catkin_INCLUDE_DIRS}
@@ -69,4 +71,12 @@ target_link_libraries(multi_april_tags_tracker ${catkin_LIBRARIES}
                                                ${OpenCV_LIBRARIES}
                                                ${APRILTAGS_LIBRARY}
                      )
+
+install(TARGETS multi_april_tags_tracker
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+install(DIRECTORY launch
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
 
